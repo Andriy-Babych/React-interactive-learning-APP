@@ -1,6 +1,6 @@
 # React Interactive Learning App
 
-Interactive learning project for React basics: small lessons, live examples, and practice exercises.
+Interactive learning project for React basics: lessons, live examples, quizzes, code-building exercises, notes, progress tracking, and achievements.
 
 ## Run locally
 
@@ -14,12 +14,27 @@ npm run dev
 - course progress map;
 - starter React topics;
 - interactive `useState` exercise;
+- typed lesson challenges;
+- multiple-choice quizzes;
+- code builder activities;
+- per-lesson notes saved in the browser;
+- interactive checkpoint tracker;
+- study stats and achievements;
+- lesson search and previous/next navigation;
 - lesson code preview;
 - responsive layout for future modules.
+
+## Useful scripts
+
+```bash
+npm run build
+npm run lint
+```
 
 ## Next ideas
 
 - add a browser code editor;
-- save progress in `localStorage`;
-- add exercises for props, effects, forms, and routing;
-- add quizzes after every module.
+- add more advanced React modules;
+- add routing lessons;
+- add a review mode for missed quiz answers;
+- add import/export for saved progress.
