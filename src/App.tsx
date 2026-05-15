@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { BookOpen, GraduationCap, Layers3, PlayCircle, RotateCcw } from 'lucide-react';
+import { CodeBuilder } from './components/CodeBuilder';
 import { CodePreview } from './components/CodePreview';
 import { ConceptLab } from './components/ConceptLab';
 import { LessonChallenge } from './components/LessonChallenge';
@@ -12,6 +13,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 type AnswersByLesson = Record<string, string>;
 type QuizAnswersByLesson = Record<string, string>;
 type NotesByLesson = Record<string, string>;
+type BuiltBlocksByLesson = Record<string, string[]>;
 
 function App() {
   const [activeLessonId, setActiveLessonId] = useLocalStorage<string>('react-lab-active-lesson', 'state');
@@ -19,6 +21,7 @@ function App() {
   const [answersByLesson, setAnswersByLesson] = useLocalStorage<AnswersByLesson>('react-lab-answers', {});
   const [quizAnswersByLesson, setQuizAnswersByLesson] = useLocalStorage<QuizAnswersByLesson>('react-lab-quiz-answers', {});
   const [notesByLesson, setNotesByLesson] = useLocalStorage<NotesByLesson>('react-lab-notes', {});
+  const [builtBlocksByLesson, setBuiltBlocksByLesson] = useLocalStorage<BuiltBlocksByLesson>('react-lab-built-blocks', {});
   const [count, setCount] = useState(0);
 
   const activeLesson = useMemo(
@@ -31,6 +34,7 @@ function App() {
   const activeAnswer = answersByLesson[activeLesson.id] ?? '';
   const activeQuizAnswer = quizAnswersByLesson[activeLesson.id] ?? '';
   const activeNotes = notesByLesson[activeLesson.id] ?? '';
+  const activeBuiltBlocks = builtBlocksByLesson[activeLesson.id] ?? [];
 
   function completeLesson() {
     setCompletedLessons((currentLessons) =>
@@ -59,6 +63,13 @@ function App() {
     }));
   }
 
+  function updateActiveBuiltBlocks(blocks: string[]) {
+    setBuiltBlocksByLesson((currentBlocks) => ({
+      ...currentBlocks,
+      [activeLesson.id]: blocks,
+    }));
+  }
+
   function resetActiveLesson() {
     setCompletedLessons((currentLessons) => currentLessons.filter((lessonId) => lessonId !== activeLesson.id));
     setAnswersByLesson((currentAnswers) => {
@@ -71,6 +82,11 @@ function App() {
       delete nextAnswers[activeLesson.id];
       return nextAnswers;
     });
+    setBuiltBlocksByLesson((currentBlocks) => {
+      const nextBlocks = { ...currentBlocks };
+      delete nextBlocks[activeLesson.id];
+      return nextBlocks;
+    });
     setCount(0);
   }
 
@@ -79,6 +95,7 @@ function App() {
     setAnswersByLesson({});
     setQuizAnswersByLesson({});
     setNotesByLesson({});
+    setBuiltBlocksByLesson({});
     setCount(0);
   }
 
@@ -157,6 +174,13 @@ function App() {
           </div>
 
           <LessonQuiz lesson={activeLesson} selectedOption={activeQuizAnswer} onSelectOption={updateActiveQuizAnswer} />
+
+          <CodeBuilder
+            lesson={activeLesson}
+            assembledBlocks={activeBuiltBlocks}
+            onChange={updateActiveBuiltBlocks}
+            onSolved={completeLesson}
+          />
 
           <LessonNotes value={activeNotes} onChange={updateActiveNotes} />
 

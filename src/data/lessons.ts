@@ -20,6 +20,12 @@ export type Lesson = {
     correctOption: string;
     explanation: string;
   };
+  builder: {
+    prompt: string;
+    blocks: string[];
+    solution: string[];
+    successMessage: string;
+  };
 };
 
 export const lessons: Lesson[] = [
@@ -52,6 +58,12 @@ export const lessons: Lesson[] = [
       options: ['A UI description', 'A CSS file', 'A database row'],
       correctOption: 'A UI description',
       explanation: 'A component returns JSX, which describes the UI React should render.',
+    },
+    builder: {
+      prompt: 'Assemble a tiny component that receives a title prop and renders it.',
+      blocks: ['function TitleCard({ title }) {', 'return <h2>{title}</h2>;', '}'],
+      solution: ['function TitleCard({ title }) {', 'return <h2>{title}</h2>;', '}'],
+      successMessage: 'Great. The component receives props and returns JSX.',
     },
   },
   {
@@ -87,6 +99,20 @@ export const lessons: Lesson[] = [
       correctOption: 'React schedules a render',
       explanation: 'State updates tell React that the component needs to render with new data.',
     },
+    builder: {
+      prompt: 'Put the state lines in the order a counter component needs.',
+      blocks: [
+        'const [count, setCount] = useState(0);',
+        '<button onClick={() => setCount(count + 1)}>{count}</button>',
+        "import { useState } from 'react';",
+      ],
+      solution: [
+        "import { useState } from 'react';",
+        'const [count, setCount] = useState(0);',
+        '<button onClick={() => setCount(count + 1)}>{count}</button>',
+      ],
+      successMessage: 'That order works: import the hook, create state, then update it from the event.',
+    },
   },
   {
     id: 'lists',
@@ -118,6 +144,12 @@ export const lessons: Lesson[] = [
       options: ['A stable id from the data', 'The array index every time', 'A random number'],
       correctOption: 'A stable id from the data',
       explanation: 'Stable ids let React match the same item across renders, inserts, and deletes.',
+    },
+    builder: {
+      prompt: 'Build the map expression that renders stable list items.',
+      blocks: ['topics.map((topic) => (', '<li key={topic.id}>{topic.name}</li>', '))'],
+      solution: ['topics.map((topic) => (', '<li key={topic.id}>{topic.name}</li>', '))'],
+      successMessage: 'Nice. The key comes from stable lesson data, not from render timing.',
     },
   },
   {
@@ -152,6 +184,12 @@ export const lessons: Lesson[] = [
       options: ['When the effect runs again', 'The component name', 'The CSS cascade'],
       correctOption: 'When the effect runs again',
       explanation: 'React compares dependency values to decide whether the effect should run again.',
+    },
+    builder: {
+      prompt: 'Assemble an effect that syncs the document title with topic.',
+      blocks: ['useEffect(() => {', 'document.title = topic;', '}, [topic]);'],
+      solution: ['useEffect(() => {', 'document.title = topic;', '}, [topic]);'],
+      successMessage: 'Exactly. The effect runs again whenever topic changes.',
     },
   },
 ];

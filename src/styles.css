@@ -239,6 +239,7 @@ a {
 .concept-lab,
 .lesson-challenge,
 .lesson-quiz,
+.code-builder,
 .lesson-notes,
 .code-preview {
   border: 1px solid #ded7c9;
@@ -389,6 +390,7 @@ a {
 }
 
 .lesson-quiz,
+.code-builder,
 .lesson-notes {
   display: grid;
   gap: 16px;
@@ -442,6 +444,114 @@ a {
 }
 
 .quiz-feedback.is-success {
+  color: #0f6f5c;
+}
+
+.code-builder {
+  grid-column: 1 / -1;
+}
+
+.builder-header,
+.builder-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.builder-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.builder-copy h2,
+.builder-copy p {
+  margin: 0;
+}
+
+.builder-copy h2 {
+  font-size: 1.25rem;
+}
+
+.builder-copy p,
+.builder-result {
+  color: #58615c;
+  line-height: 1.55;
+}
+
+.builder-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr);
+  gap: 16px;
+}
+
+.block-bank,
+.assembled-code {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 178px;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.block-bank {
+  background: #f8efe8;
+}
+
+.assembled-code {
+  background: #151a22;
+}
+
+.code-block-choice,
+.assembled-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.code-block-choice {
+  color: #19211d;
+  border: 1px solid #d9cfbd;
+  background: #fffdf8;
+}
+
+.code-block-choice:hover {
+  border-color: #d8513f;
+  background: #fff6ef;
+}
+
+.assembled-line {
+  color: #e7edf0;
+  border: 1px solid rgba(247, 244, 237, 0.14);
+  background: rgba(247, 244, 237, 0.06);
+}
+
+.assembled-line:hover {
+  border-color: rgba(242, 200, 75, 0.75);
+}
+
+.empty-builder {
+  display: grid;
+  place-items: center;
+  min-height: 148px;
+  color: rgba(247, 244, 237, 0.64);
+  border: 1px dashed rgba(247, 244, 237, 0.24);
+  border-radius: 8px;
+}
+
+.builder-result {
+  max-width: 620px;
+  font-weight: 700;
+}
+
+.builder-result.is-success {
   color: #0f6f5c;
 }
 
@@ -515,6 +625,10 @@ code {
   .lesson-grid {
     grid-template-columns: 1fr;
   }
+
+  .builder-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 620px) {
@@ -534,7 +648,9 @@ code {
   }
 
   .challenge-header,
-  .challenge-footer {
+  .challenge-footer,
+  .builder-header,
+  .builder-footer {
     align-items: flex-start;
     flex-direction: column;
   }
