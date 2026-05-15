@@ -1,6 +1,14 @@
 import { Check, Clock3 } from 'lucide-react';
+import type { Lesson } from '../data/lessons';
 
-export function ProgressMap({ lessons, activeLessonId, completedLessons, onSelectLesson }) {
+type ProgressMapProps = {
+  lessons: Lesson[];
+  activeLessonId: string;
+  completedLessons: string[];
+  onSelectLesson: (lessonId: string) => void;
+};
+
+export function ProgressMap({ lessons, activeLessonId, completedLessons, onSelectLesson }: ProgressMapProps) {
   return (
     <nav className="progress-map" aria-label="Learning modules">
       {lessons.map((lesson, index) => {

@@ -1,4 +1,15 @@
-export const lessons = [
+export type Lesson = {
+  id: string;
+  title: string;
+  level: string;
+  duration: string;
+  summary: string;
+  goal: string;
+  checkpoints: string[];
+  code: string;
+};
+
+export const lessons: Lesson[] = [
   {
     id: 'jsx',
     title: 'JSX and Components',

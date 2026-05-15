@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import { BookOpen, GraduationCap, Layers3, PlayCircle } from 'lucide-react';
-import { CodePreview } from './components/CodePreview.jsx';
-import { ConceptLab } from './components/ConceptLab.jsx';
-import { ProgressMap } from './components/ProgressMap.jsx';
-import { lessons } from './data/lessons.js';
+import { CodePreview } from './components/CodePreview';
+import { ConceptLab } from './components/ConceptLab';
+import { ProgressMap } from './components/ProgressMap';
+import { lessons } from './data/lessons';
 
 function App() {
-  const [activeLessonId, setActiveLessonId] = useState('state');
-  const [completedLessons, setCompletedLessons] = useState(['jsx']);
+  const [activeLessonId, setActiveLessonId] = useState<string>('state');
+  const [completedLessons, setCompletedLessons] = useState<string[]>(['jsx']);
   const [count, setCount] = useState(0);
 
   const activeLesson = useMemo(

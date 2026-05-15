@@ -1,6 +1,14 @@
 import { RotateCcw, Sparkles } from 'lucide-react';
 
-export function ConceptLab({ count, onIncrement, onReset, completed, onComplete }) {
+type ConceptLabProps = {
+  count: number;
+  onIncrement: () => void;
+  onReset: () => void;
+  completed: boolean;
+  onComplete: () => void;
+};
+
+export function ConceptLab({ count, onIncrement, onReset, completed, onComplete }: ConceptLabProps) {
   const message =
     count === 0
       ? 'Click the button and React will update the UI from state.'

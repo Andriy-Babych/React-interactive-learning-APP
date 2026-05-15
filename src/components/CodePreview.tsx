@@ -1,6 +1,11 @@
 import { Copy, TerminalSquare } from 'lucide-react';
 
-export function CodePreview({ title, code }) {
+type CodePreviewProps = {
+  title: string;
+  code: string;
+};
+
+export function CodePreview({ title, code }: CodePreviewProps) {
   async function copyCode() {
     await navigator.clipboard.writeText(code);
   }
