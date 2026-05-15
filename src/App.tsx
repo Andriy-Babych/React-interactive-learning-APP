@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { BookOpen, GraduationCap, Layers3, PlayCircle, RotateCcw } from 'lucide-react';
+import { Achievements } from './components/Achievements';
 import { CheckpointTracker } from './components/CheckpointTracker';
 import { CodeBuilder } from './components/CodeBuilder';
 import { CodePreview } from './components/CodePreview';
@@ -224,6 +225,14 @@ function App() {
           solvedQuizCount={solvedQuizCount}
           notesCount={notesCount}
           solvedBuilderCount={solvedBuilderCount}
+        />
+
+        <Achievements
+          completedCount={completedLessons.length}
+          lessonCount={lessons.length}
+          solvedQuizCount={solvedQuizCount}
+          solvedBuilderCount={solvedBuilderCount}
+          notesCount={notesCount}
         />
       </aside>
 

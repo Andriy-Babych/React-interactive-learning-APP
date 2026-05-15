@@ -186,6 +186,41 @@ a {
   font-size: 1.2rem;
 }
 
+.sidebar-section-title {
+  color: rgba(247, 244, 237, 0.76);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.achievements {
+  display: grid;
+  gap: 10px;
+}
+
+.achievement-list {
+  display: grid;
+  gap: 8px;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 38px;
+  padding: 8px 10px;
+  color: rgba(247, 244, 237, 0.46);
+  border: 1px solid rgba(247, 244, 237, 0.1);
+  border-radius: 8px;
+  background: rgba(247, 244, 237, 0.04);
+  font-weight: 800;
+}
+
+.achievement.is-unlocked {
+  color: #17241f;
+  border-color: #f2c84b;
+  background: #f2c84b;
+}
+
 .lesson-search {
   display: grid;
   gap: 8px;
