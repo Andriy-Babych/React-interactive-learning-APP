@@ -4,11 +4,9 @@ type ConceptLabProps = {
   count: number;
   onIncrement: () => void;
   onReset: () => void;
-  completed: boolean;
-  onComplete: () => void;
 };
 
-export function ConceptLab({ count, onIncrement, onReset, completed, onComplete }: ConceptLabProps) {
+export function ConceptLab({ count, onIncrement, onReset }: ConceptLabProps) {
   const message =
     count === 0
       ? 'Click the button and React will update the UI from state.'
@@ -36,9 +34,7 @@ export function ConceptLab({ count, onIncrement, onReset, completed, onComplete 
         </div>
       </div>
 
-      <button type="button" className="complete-action" onClick={onComplete}>
-        {completed ? 'Lesson completed' : 'Mark lesson complete'}
-      </button>
+      <div className="lab-status">Practice clicks: {count}</div>
     </section>
   );
 }
