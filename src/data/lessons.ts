@@ -14,6 +14,12 @@ export type Lesson = {
     successMessage: string;
     hint: string;
   };
+  quiz: {
+    question: string;
+    options: string[];
+    correctOption: string;
+    explanation: string;
+  };
 };
 
 export const lessons: Lesson[] = [
@@ -40,6 +46,12 @@ export const lessons: Lesson[] = [
       expectedAnswer: 'props',
       successMessage: 'Correct. Props are the input contract for a component.',
       hint: 'It is short for properties.',
+    },
+    quiz: {
+      question: 'What should a React component return?',
+      options: ['A UI description', 'A CSS file', 'A database row'],
+      correctOption: 'A UI description',
+      explanation: 'A component returns JSX, which describes the UI React should render.',
     },
   },
   {
@@ -69,6 +81,12 @@ export const lessons: Lesson[] = [
       successMessage: 'Nice. useState stores values that should trigger a render when they change.',
       hint: 'It starts with use and returns a value plus a setter.',
     },
+    quiz: {
+      question: 'What happens when a state setter receives a new value?',
+      options: ['React schedules a render', 'The page reloads', 'CSS is regenerated'],
+      correctOption: 'React schedules a render',
+      explanation: 'State updates tell React that the component needs to render with new data.',
+    },
   },
   {
     id: 'lists',
@@ -94,6 +112,12 @@ export const lessons: Lesson[] = [
       expectedAnswer: 'key',
       successMessage: 'Exactly. A stable key helps React reconcile list items correctly.',
       hint: 'It should be unique and stable inside the list.',
+    },
+    quiz: {
+      question: 'Which value makes the best key for a list item?',
+      options: ['A stable id from the data', 'The array index every time', 'A random number'],
+      correctOption: 'A stable id from the data',
+      explanation: 'Stable ids let React match the same item across renders, inserts, and deletes.',
     },
   },
   {
@@ -122,6 +146,12 @@ export const lessons: Lesson[] = [
       expectedAnswer: 'useEffect',
       successMessage: 'You got it. useEffect is where React code syncs with external systems.',
       hint: 'It receives a callback and a dependency array.',
+    },
+    quiz: {
+      question: 'What does the dependency array control?',
+      options: ['When the effect runs again', 'The component name', 'The CSS cascade'],
+      correctOption: 'When the effect runs again',
+      explanation: 'React compares dependency values to decide whether the effect should run again.',
     },
   },
 ];

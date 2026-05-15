@@ -3,16 +3,22 @@ import { BookOpen, GraduationCap, Layers3, PlayCircle, RotateCcw } from 'lucide-
 import { CodePreview } from './components/CodePreview';
 import { ConceptLab } from './components/ConceptLab';
 import { LessonChallenge } from './components/LessonChallenge';
+import { LessonNotes } from './components/LessonNotes';
+import { LessonQuiz } from './components/LessonQuiz';
 import { ProgressMap } from './components/ProgressMap';
 import { lessons } from './data/lessons';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
 type AnswersByLesson = Record<string, string>;
+type QuizAnswersByLesson = Record<string, string>;
+type NotesByLesson = Record<string, string>;
 
 function App() {
   const [activeLessonId, setActiveLessonId] = useLocalStorage<string>('react-lab-active-lesson', 'state');
   const [completedLessons, setCompletedLessons] = useLocalStorage<string[]>('react-lab-completed-lessons', []);
   const [answersByLesson, setAnswersByLesson] = useLocalStorage<AnswersByLesson>('react-lab-answers', {});
+  const [quizAnswersByLesson, setQuizAnswersByLesson] = useLocalStorage<QuizAnswersByLesson>('react-lab-quiz-answers', {});
+  const [notesByLesson, setNotesByLesson] = useLocalStorage<NotesByLesson>('react-lab-notes', {});
   const [count, setCount] = useState(0);
 
   const activeLesson = useMemo(
@@ -23,6 +29,8 @@ function App() {
   const progress = Math.round((completedLessons.length / lessons.length) * 100);
   const isActiveCompleted = completedLessons.includes(activeLesson.id);
   const activeAnswer = answersByLesson[activeLesson.id] ?? '';
+  const activeQuizAnswer = quizAnswersByLesson[activeLesson.id] ?? '';
+  const activeNotes = notesByLesson[activeLesson.id] ?? '';
 
   function completeLesson() {
     setCompletedLessons((currentLessons) =>
@@ -37,9 +45,28 @@ function App() {
     }));
   }
 
+  function updateActiveQuizAnswer(option: string) {
+    setQuizAnswersByLesson((currentAnswers) => ({
+      ...currentAnswers,
+      [activeLesson.id]: option,
+    }));
+  }
+
+  function updateActiveNotes(notes: string) {
+    setNotesByLesson((currentNotes) => ({
+      ...currentNotes,
+      [activeLesson.id]: notes,
+    }));
+  }
+
   function resetActiveLesson() {
     setCompletedLessons((currentLessons) => currentLessons.filter((lessonId) => lessonId !== activeLesson.id));
     setAnswersByLesson((currentAnswers) => {
+      const nextAnswers = { ...currentAnswers };
+      delete nextAnswers[activeLesson.id];
+      return nextAnswers;
+    });
+    setQuizAnswersByLesson((currentAnswers) => {
       const nextAnswers = { ...currentAnswers };
       delete nextAnswers[activeLesson.id];
       return nextAnswers;
@@ -50,6 +77,8 @@ function App() {
   function resetCourse() {
     setCompletedLessons([]);
     setAnswersByLesson({});
+    setQuizAnswersByLesson({});
+    setNotesByLesson({});
     setCount(0);
   }
 
@@ -126,6 +155,10 @@ function App() {
               onReset={resetActiveLesson}
             />
           </div>
+
+          <LessonQuiz lesson={activeLesson} selectedOption={activeQuizAnswer} onSelectOption={updateActiveQuizAnswer} />
+
+          <LessonNotes value={activeNotes} onChange={updateActiveNotes} />
 
           <CodePreview title={activeLesson.title} code={activeLesson.code} />
         </div>

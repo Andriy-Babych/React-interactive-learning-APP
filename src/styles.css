@@ -160,7 +160,8 @@ a {
 
 .workspace-header p,
 .lesson-brief p,
-.concept-lab p {
+.concept-lab p,
+.lesson-quiz p {
   max-width: 720px;
   margin: 0;
   color: #58615c;
@@ -237,6 +238,8 @@ a {
 .lesson-brief,
 .concept-lab,
 .lesson-challenge,
+.lesson-quiz,
+.lesson-notes,
 .code-preview {
   border: 1px solid #ded7c9;
   border-radius: 8px;
@@ -383,6 +386,85 @@ a {
 
 .challenge-result.is-success {
   color: #0f6f5c;
+}
+
+.lesson-quiz,
+.lesson-notes {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+}
+
+.lesson-quiz h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 48px;
+  padding: 12px 14px;
+  color: #19211d;
+  text-align: left;
+  border: 1px solid #d9cfbd;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.quiz-option:hover,
+.quiz-option.is-selected {
+  border-color: #0f6f5c;
+  background: #eef7f2;
+}
+
+.quiz-option.is-correct {
+  color: #0f6f5c;
+  border-color: #0f6f5c;
+}
+
+.quiz-option.is-wrong {
+  color: #a33b2d;
+  border-color: #d8513f;
+  background: #fbefec;
+}
+
+.quiz-feedback {
+  font-weight: 700;
+}
+
+.quiz-feedback.is-success {
+  color: #0f6f5c;
+}
+
+.lesson-notes {
+  grid-column: 1 / -1;
+}
+
+.lesson-notes textarea {
+  min-height: 130px;
+  width: 100%;
+  resize: vertical;
+  padding: 14px;
+  color: #19211d;
+  border: 1px solid #cfc5b6;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  line-height: 1.55;
+}
+
+.lesson-notes textarea:focus {
+  outline: 3px solid rgba(15, 111, 92, 0.2);
+  border-color: #0f6f5c;
 }
 
 .code-preview {
